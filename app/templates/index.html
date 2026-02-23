@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Виберіть підручник і тему</h2>
+<form action="/generate" method="post">
+    <label for="book_id">Підручник:</label>
+    <select name="book_id" id="book_id" required>
+        {% for book in books %}
+        <option value="{{ book.id }}">{{ book.title }} ({{ book.grade }} клас)</option>
+        {% endfor %}
+    </select>
+
+    <label for="topic">Тема:</label>
+    <input type="text" name="topic" id="topic" list="topics" required>
+    <datalist id="topics">
+        <!-- Буде заповнено через JS при виборі книги -->
+    </datalist>
+
+    <label for="lesson_type">Тип уроку:</label>
+    <select name="lesson_type" id="lesson_type">
+        <option value="1">Ознайомлення</option>
+        <option value="2">Практика</option>
+        <option value="3">Закріплення</option>
+    </select>
+
+    <button type="submit">Згенерувати урок</button>
+</form>
+{% endblock %}
