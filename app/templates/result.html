@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Результат генерації</h2>
+<h3>Тема: {{ lesson.topic }}</h3>
+
+<h4>Конспект:</h4>
+<pre>{{ lesson.summary }}</pre>
+
+<h4>Презентація:</h4>
+<ul>
+    {% for slide in lesson.presentation_slides %}
+    <li><strong>{{ slide.title }}</strong>: {{ slide.content }}</li>
+    {% endfor %}
+</ul>
+
+<h4>Завдання на уроці:</h4>
+<ul>
+    {% for task in lesson.classwork %}
+    <li>{{ task }}</li>
+    {% endfor %}
+</ul>
+
+<h4>Домашнє завдання:</h4>
+<ul>
+    {% for task in lesson.homework %}
+    <li>{{ task }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ url_for('download', filename=ppt_file) }}">Завантажити презентацію</a>
+<a href="{{ url_for('download', filename=doc_file) }}">Завантажити конспект</a>
+<br>
+<a href="/">Назад</a>
+{% endblock %}
